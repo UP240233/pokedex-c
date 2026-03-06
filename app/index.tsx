@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import PokemonCard from "@/components/PokemonCard";
 import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry"
 
@@ -29,7 +29,7 @@ export default function Index() {
     }
 
   return (
-    <View>
+    <ScrollView>
       {
         results.map((item) => (
           <PokemonCard 
@@ -38,6 +38,6 @@ export default function Index() {
           url={item.url} />
         ))
       }
-    </View>
+    </ScrollView>
   );
 }

@@ -1,22 +1,42 @@
+import { router } from "expo-router";
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 interface PokemonCardProps {
-    name: string;
-    url: string;
+  name: string;
+  url: string;
 }
 
-export default function PokemonCard(props :PokemonCardProps) {
-    const id = props.url.split("/").filter(Boolean).at(-1);
-    console.log(id);
-    const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-    return (
-    <View>
-        <Image source={{ uri: pokemonImageUrl }}
-        style={{ width: 100, height: 100 }}
+export default function PokemonCard(props: PokemonCardProps) {
+  const id = props.url.split("/").filter(Boolean).at(-1);
+  console.log(id);
+  const pokemonImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  return (
+    <Pressable
+      onPress={() => router.push("/new-screen")}
+      style={({ pressed }) => [
+        styles.pressableStyle,
+        pressed && {
+          opacity: 0.5,
+        },
+      ]}
+    >
+      <View>
+        <Image
+          source={{ uri: pokemonImageUrl }}
+          style={{ width: 100, height: 100 }}
         ></Image>
         <Text>{props.name}</Text>
-        <Text>{props.url}</Text>
-    </View>
-    );
+        <Text>{id}</Text>
+      </View>
+    </Pressable>
+  );
 }
+
+const styles = StyleSheet.create({
+  pressableStyle: {
+    borderWidth: 1,
+    alignItems: "center",
+    backgroundColor: "#64ffd3",
+  },
+});
