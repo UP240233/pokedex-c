@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
 
@@ -7,8 +7,7 @@ export default function PokemonDetailScreen() {
   const [pokemonData, setPokemonData] = useState(null)
 
   useEffect(() => {
-    getPokemonData()
-  }, [])
+    getPokemonData()}, [])
 
   const getPokemonData = async () => {
     try {
@@ -23,14 +22,9 @@ export default function PokemonDetailScreen() {
   }
 
   return (
-    <View style={{ padding: 20 }}>
+    <ScrollView style={{ padding: 20 }}>
       <Text>{params.name}</Text>
-
-      <Text>
-        {pokemonData
-          ? JSON.stringify(pokemonData, null, 2)
-          : 'Cargando...'}
-      </Text>
-    </View>
+      <Text>{ JSON.stringify(pokemonData, null, 2)}</Text>
+    </ScrollView>
   )
 }
